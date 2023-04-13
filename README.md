@@ -1,0 +1,1 @@
+# spip_squelettes_paragraphe2023
