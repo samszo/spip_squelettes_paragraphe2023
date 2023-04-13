@@ -1,0 +1,34 @@
+<INCLURE{fond=breadcrumb/404,env} />
+
+<div class="cartouche">
+    <h1><:pass_erreur:> [(#ENV{status, 404}|intval)]</h1>
+</div>
+
+[(#ENV{erreur}|non)
+[(#ENV{fond_erreur}|=={article}|oui)#SET{erreur, oui}<div class="chapo"><p><:aucun_article:></p></div>]
+[(#ENV{fond_erreur}|=={rubrique}|oui)#SET{erreur, oui}<div class="chapo"><p><:aucune_rubrique:></p></div>]
+[(#ENV{fond_erreur}|=={breve}|oui)#SET{erreur, oui}<div class="chapo"><p><:aucune_breve:></p></div>]
+[(#ENV{fond_erreur}|=={auteur}|oui)#SET{erreur, oui}<div class="chapo"><p><:aucun_auteur:></p></div>]
+[(#ENV{fond_erreur}|=={site}|oui)#SET{erreur, oui}<div class="chapo"><p><:aucun_site:></p></div>]
+[(#ENV{fond_erreur}|=={forum}|oui)#SET{erreur, oui}<div class="chapo"><p><:forum:aucun_message_forum:></p></div>]
+]
+
+[(#GET{erreur}|!={oui}|?{<div class="chapo"><p><multi>[fr]Malheureusement la page que vous cherchez est introuvable sur le site...[en]Unfortunately we could not find the page you were looking for...</multi></p></div>})]
+
+    <div class="row list-group">
+        <div class="col-6 col-md-4">
+            <a href="#URL_SITE_SPIP/" class="list-group-item list-group-item-action">Retourner à la page d'accueil</a>
+        </div>
+        <div class="col-6 col-md-4">
+            <a href="#URL_SITE_SPIP/" id="test" class="list-group-item list-group-item-action">Effectuer une recherche</a>
+        </div>
+    </div>
+
+    <script>
+    $(document).ready(function() {
+        $(document).on('click', "#test", function() {
+          $("#searchbar").toggle("slow");
+          return false;
+        });
+      });
+    </script>

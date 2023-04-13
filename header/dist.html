@@ -1,0 +1,41 @@
+<style>
+.slogan{font-size: 0.7em;}
+ @media screen and (max-width: 575px) { 
+    .slogan{
+        font-size: 0.5em;
+    }
+}
+
+</style>
+#SET{img, squelettes/img/bando.png}
+
+<BOUCLEn(HIERARCHIE)>
+	[(#LOGO_RUBRIQUE|?{ #SET{img, #LOGO_RUBRIQUE|extraire_attribut{src} }} )]
+</BOUCLEn>
+
+<BOUCLEn2(HIERARCHIE){tout}>
+	[(#TOTAL_BOUCLE|=={2}|?{#SET{hierarchie, ok}})]
+	[(#LOGO_RUBRIQUE|et{#GET{hierarchie}}) #SET{img, #LOGO_RUBRIQUE|extraire_attribut{src} } ]
+</BOUCLEn2>
+
+
+[(#GET{img}|=={""}|?{#SET{img, squelettes/img/fusion.jpg,'non'}})]
+<div class="bandeau" style="background-image: url('#GET{img}')">
+
+	<div class="bandeau-titre">
+		<a href="#URL_SITE_SPIP" style="font-size:1.5em;">
+			<img src="squelettes/img/logo-para-outlines.svg" alt="Laboratoire Paragraphe" style="display: inherit;" >
+		</a>
+
+		<!-- <h2 class="titre-header" style="max-width: 440px;background: #fff;height: 5em;padding: 1em;">
+			<span style="color: var(--main-color)">T</span>rans<span style="color: var(--main-color)">C</span>rit
+			<br>
+			<span class="slogan" style="color: var(--main-color);">
+				Transferts Critiques Anglophones
+			</span>
+		</h2>
+		-->		
+	</div>
+
+</div>
+<INCLURE{fond=inclure/sticky-menu-js,env} />

@@ -1,0 +1,52 @@
+
+<div class="slider">
+
+  <BOUCLE_rubActu1(RUBRIQUES){id_rubrique=595}>
+
+    <B_rubActu1Trad>
+
+    <BOUCLE_rubActu1Trad(RUBRIQUES){traduction}{lang=#ENV{lang}}>
+    <BOUCLE_rub3(ARTICLES){branche}{!id_rubrique IN 695,696,703}{!par date}{0,9}>
+
+    <div class="actu col-md-4 col-12">
+      <div class="actu-img">
+        <a href="#URL_ARTICLE">[(#LOGO_ARTICLE_RUBRIQUE|inserer_attribut{class, img-responsive})]</a>
+      </div>
+      <div class="x x-sommaire">
+        <a href="#URL_ARTICLE">
+          <h5>[(#TITRE|couper{50})]</h5>
+        </a>
+      </div>
+    </div>
+
+    </BOUCLE_rub3>
+
+  </BOUCLE_rubActu1Trad>
+
+  </B_rubActu1Trad>
+
+  </B_rub3>
+
+</BOUCLE_rubActu1>
+
+  <BOUCLE_rubActu2(RUBRIQUES){id_rubrique=595}>
+
+    <B_rubActu2Trad>
+      <BOUCLE_rubActu2Trad(RUBRIQUES){traduction}{lang=#ENV{lang}}>
+        <div class="actu col-md-4 col-12">
+          <div class="actu-img">
+            <a href="#URL_RUBRIQUE">[(#LOGO_ARTICLE_RUBRIQUE|inserer_attribut{class, img-responsive})]</a>
+          </div>
+          <div class="x x-sommaire">
+            <a href="#URL_RUBRIQUE">
+              <h5><multi>[fr]Voir toutes les actualités[en]See all the news</multi></h5>
+            </a>
+          </div>
+        </div>
+      </BOUCLE_rubActu2Trad>
+    </B_rubActu2Trad>
+
+  </BOUCLE_rubActu2>
+
+
+</div>

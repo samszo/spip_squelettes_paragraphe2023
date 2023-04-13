@@ -1,0 +1,55 @@
+.container-rubrique15{
+	display: flex;
+	justify-content:space-between;
+}
+.aside-rubrique15 a, .content-rubrique15 a{
+	text-decoration: none;
+	color: #000;
+}
+.aside-rubrique15{
+	width: 25%;
+	
+	
+}
+
+.content-rubrique15{
+	width: 70%;
+	
+}
+
+.content-rubrique15 figure{
+	width: 25%; 
+	display: inline-block;
+	margin-left: 60px;
+	margin-bottom: 20px;
+	border : 3px solid #fff;
+	box-shadow: 0px 0px 5px #ccc;
+	padding: 5px;
+
+	
+}
+
+.content-rubrique15 figure img{
+	height: 150px;
+	border :1px solid #ccc;
+}
+
+.prenom-nom{
+	text-align: center;
+	margin:0;
+}
+.descriptif{
+	text-align: center;
+	font-size: 12px;
+}
+
+
+
+.footer{
+	clear: both;
+}
+
+.list-group .activ{
+	/* background-color: #4AA94B; */
+	background-color: #94C11E;
+}

@@ -1,0 +1,71 @@
+<BOUCLE_principale(RUBRIQUES){id_rubrique}>
+	<!DOCTYPE html>
+	<html lang="fr">
+	<head>
+		<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)] - Université Paris 8</title>
+		[<meta name="description" content="(#DESCRIPTIF|sinon{#INTRODUCTION}|couper{150}|textebrut)">]
+		<INCLURE{fond=head/dist,env} />
+		<INCLURE{fond=inclure/animation-js,env} />
+		<INCLURE{fond=inclure/back-to-top-js,env} />
+
+	</head>
+	<body data-spy="scroll" data-target=".doc-sidebar">
+		<div class="page">
+			<a id="top-button"></a>
+			
+			<div class="topnav" id="top-header">
+				<INCLURE{fond=inclure/top,env} />
+			</div>
+
+			<div id="p8"><a class="website-brand" href="#URL_SITE_SPIP"><img src ="squelettes/img/logop8_noir.png" alt="#NOM_SITE_SPIP"></a></div>
+			[<div class="navigation" id="navbar">
+				(#INCLURE{fond=inclure/menu,env})
+			</div>]
+			
+			<div class="header" id="header">
+				
+				<INCLURE{fond=header/dist,env} />
+				
+			</div>
+			
+	        
+			<div class="container">
+				<INCLURE{fond=breadcrumb/rubrique,env} /> 
+				
+				<div class="wrapper" id="wrapper">
+					<div class="container-content row primary" id="content">
+						<INCLURE{fond=content/rubrique-contenu-liste,env} />
+						
+					</div>
+				</div>
+
+			</div>
+
+			<div class="footer" id="footer">
+				<div class="container">
+				<INCLURE{fond=footer/dist,env} />
+				</div>
+			</div>
+		</div>
+
+		<script>
+			$('.figure-img').each(function(){           // Note: {.post-thumb img} is css selector of the image tag
+		var t = $(this),
+			s = 'url(' + t.attr('src') + ')',
+			p = t.parent(),
+			d = $('<div></div>');
+		t.hide();
+		p.append(d);
+		d.css({
+			'height'                : 200,          // Note: You can change it for your needs
+			'background-size'       : 'cover',
+			'background-repeat'     : 'no-repeat',
+			'background-position'   : 'center',
+			'background-image'      : s
+		});
+	});
+		</script>
+
+	</body>
+	</html>
+</BOUCLE_principale>

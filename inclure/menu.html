@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-lg" id="nav">
+  
+  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#unNom" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <a class="navbar-brand" id="navbar-brand" href="#URL_SITE_SPIP"><img src ="squelettes/img/logop8_blanc.png" alt="#NOM_SITE_SPIP"></a>
+
+  <div class="collapse navbar-collapse nav-principal " id="unNom" >
+    <ul class="nav navbar-nav mr-auto">
+
+<BOUCLE_rub(RUBRIQUES){racine}{lang}{id_rubrique!=107}>
+<BOUCLE_rub1(RUBRIQUES){id_parent}{par num titre}>
+
+                  <li class=" nav-item dropdown ">
+            <a href="#URL_RUBRIQUE"  class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#TITRE <b class="caret"></b></a>
+            <ul class="dropdown-menu" >
+
+        <BOUCLE_Rub_n1(RUBRIQUES){id_parent = #_rub1:ID_RUBRIQUE}{par num titre}>
+
+        <BOUCLE_article_rub_n0_avant(ARTICLES){id_rubrique=#_rub1:ID_RUBRIQUE}{titre<#RANG}{statut=publie}{par num titre}{doublons}>
+        <li><a class="dropdown-item" href="#URL_ARTICLE">#TITRE</a></li>
+        </BOUCLE_article_rub_n0_avant>
+        <li><a class=" dropdown-item" href="#URL_RUBRIQUE">#TITRE</a></li>
+      </BOUCLE_Rub_n1>
+
+      <BOUCLE_article_rub_n0(ARTICLES){id_rubrique=#_rub1:ID_RUBRIQUE}{statut=publie}{par num titre}{!par date}{doublons}>
+      <li><a class="dropdown-item" href="#URL_ARTICLE">#TITRE</a></li>
+      </BOUCLE_article_rub_n0>
+                  </ul>
+          </li>
+
+</BOUCLE_rub1>
+</BOUCLE_rub>
+    </ul>
+  </div>
+    
+  </div>
+
+
+  </nav>
+  
+
+

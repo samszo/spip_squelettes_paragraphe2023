@@ -1,0 +1,109 @@
+<BOUCLE_principale(RUBRIQUES){id_rubrique}>
+	<!DOCTYPE html>
+	<html lang="fr">
+	<head>
+		<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)] - Université Paris 8</title>
+		[<meta name="description" content="(#DESCRIPTIF|sinon{#INTRODUCTION}|couper{150}|textebrut)">]
+		<INCLURE{fond=head/dist,env} />
+		<INCLURE{fond=inclure/animation-js,env} />
+		<INCLURE{fond=inclure/back-to-top-js,env} />
+
+	</head>
+
+	<body data-spy="scroll" data-target=".doc-sidebar">
+		<div class="page">
+			<a id="top-button"></a>
+			
+			<div class="topnav" id="top-header">
+				<INCLURE{fond=inclure/top,env} />
+			</div>
+
+			<div id="p8"><a class="website-brand" href="#URL_SITE_SPIP"><img src ="squelettes/img/logop8_noir.png" alt="#NOM_SITE_SPIP"></a></div>	        
+			[<div class="navigation" id="navbar">
+				(#INCLURE{fond=inclure/menu,env})
+			</div>]
+			
+			<div class="header" id="header">
+				
+				<INCLURE{fond=header/dist,env} />
+				
+			</div>
+			
+	        
+			<div class="container">
+				<INCLURE{fond=breadcrumb/rubrique,env} /> 
+				
+				<div class="wrapper" id="wrapper">
+					<div class="container-content row primary" id="content">
+
+		                <section class="main-content col-12">
+	                        <h2 class="titre titre-principal">#TITRE</h2>
+	                        <div class="main main-membre">
+								<INCLURE{fond=inclure/options-article-onglets, id_rubrique} />
+								
+								<BOUCLE_existence(RUBRIQUES){id_rubrique=#ENV{id_rubrique}}>
+									#SET{lang,#LANG}
+									<B_traductions>
+									
+										<BOUCLE_traductions(RUBRIQUES){traduction}{lang=#ENV{lang}}>
+											[(#GET{lang}|!={#ENV{lang}}|?{<?php header('Location: #URL_RUBRIQUE'); exit; ?>})]
+										</BOUCLE_traductions>
+									
+									</B_traductions>
+									<multi>[fr]<p><i>Cette rubrique n'est pas disponible en français.</i></p>[en]<p><i>This section is not available in english.</i></p></multi>
+									<//B_traductions>
+									
+								</BOUCLE_existence>
+
+		                        <div class="row">
+
+									<BOUCLE_contenant(ARTICLES){branche #_principale:ID_RUBRIQUE}{tri_rubrique}>		
+									 
+									 	<div class="actu col-lg-4 col-md-6 col-12">
+											<a href="#URL_ARTICLE">[(#LOGO_ARTICLE_RUBRIQUE|inserer_attribut{class, img-responsive})]</a>
+											<a class="actu-title" href="#URL_ARTICLE">
+												<div class="x x-rubrique">
+													<h5 style="margin: auto">[(#TITRE|couper{50})]</h5>
+													<p style="margin: auto">[(#INTRODUCTION|couper{50})]</p>
+												</div>
+											</a>
+										</div>
+									</BOUCLE_contenant>
+									
+		                        </div>
+
+	                    	</div>
+                        </section>
+                    </div>
+				</div>
+						
+			</div>
+
+			<div class="footer" id="footer">
+				<div class="container">
+				<INCLURE{fond=footer/dist,env} />
+				</div>
+			</div>
+		</div>
+
+		<script>
+			$('.img-responsive').each(function(){           // Note: {.post-thumb img} is css selector of the image tag
+		var t = $(this),
+			s = 'url(' + t.attr('src') + ')',
+			p = t.parent(),
+			d = $('<div></div>');
+		t.hide();
+		p.append(d);
+		d.css({
+			'height'                : 220,          // Note: You can change it for your needs
+			'background-size'       : 'cover',
+			'background-repeat'     : 'no-repeat',
+			'background-position'   : 'center',
+			'background-image'      : s
+		});
+	});
+		</script>
+
+	</body>
+	</html>
+</BOUCLE_principale>

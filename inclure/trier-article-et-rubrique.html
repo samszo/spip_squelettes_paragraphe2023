@@ -1,0 +1,22 @@
+<BOUCLE_rub1(RUBRIQUES){id_parent}{par num titre}>
+<div class="4u 6u(narrow) 12u(mobile)">
+	<figure class="">
+			
+		<figcaption>
+		  	<h2>#TITRE</h2>
+
+		  	<BOUCLE_Rub_n1(RUBRIQUES){id_parent = #_rub1:ID_RUBRIQUE}{par num titre}>
+
+				<BOUCLE_article_rub_n0_avant(ARTICLES){id_rubrique=#_rub1:ID_RUBRIQUE}{titre<#RANG}{statut=publie}{par num titre}{doublons}>
+				<p><a href="#URL_ARTICLE">#TITRE</a></p>
+				</BOUCLE_article_rub_n0_avant>
+				<p><a href="#URL_RUBRIQUE">#TITRE</a></p>
+			</BOUCLE_Rub_n1>
+
+			<BOUCLE_article_rub_n0(ARTICLES){id_rubrique=#_rub1:ID_RUBRIQUE}{statut=publie}{par num titre}{!par date}{doublons}>
+			<p><a href="#URL_ARTICLE">#TITRE</a></p>
+			</BOUCLE_article_rub_n0>
+		</figcaption>
+	</figure>
+</div>
+</BOUCLE_rub1>

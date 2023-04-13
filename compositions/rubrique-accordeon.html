@@ -1,0 +1,160 @@
+<BOUCLE_principale(RUBRIQUES){id_rubrique}>
+	<!DOCTYPE html>
+	<html lang="fr">
+	<head>
+		<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)] - Université Paris 8</title>
+		[<meta name="description" content="(#DESCRIPTIF|sinon{#INTRODUCTION}|couper{150}|textebrut)">]
+		<INCLURE{fond=head/dist,env} />
+		<INCLURE{fond=inclure/animation-js,env} />
+		<INCLURE{fond=inclure/back-to-top-js,env} />
+
+	</head>
+
+	<body data-spy="scroll" data-target=".doc-sidebar">
+		<div class="page">
+			<a id="top-button"></a>
+
+      <div class="topnav" id="top-header">
+        <INCLURE{fond=inclure/top,env} />
+      </div>
+      
+      <div id="p8"><a class="website-brand" href="#URL_SITE_SPIP"><img src ="squelettes/img/logop8_noir.png" alt="#NOM_SITE_SPIP"></a></div>	        
+			[<div class="navigation" id="navbar">
+				(#INCLURE{fond=inclure/menu,env})
+			</div>]
+			
+			<div class="header" id="header">
+				
+				<INCLURE{fond=header/dist,env} />
+				
+			</div>
+			
+	        
+			<div class="container rubrique-accordeon">
+				<INCLURE{fond=breadcrumb/rubrique,env} /> 
+				
+				<div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
+					<div class="container-content row primary" id="accordionEx" role="tablist" aria-multiselectable="true">
+
+		                <section class="main-content col-12">
+                        <h2 class="titre titre-principal">#TITRE</h2>
+                        <div class="main main-membre">
+                          <INCLURE{fond=inclure/options-article-onglets, id_rubrique} />
+                          
+                          <BOUCLE_existence(RUBRIQUES){id_rubrique=#ENV{id_rubrique}}>
+                            #SET{lang,#LANG}
+                            <B_traductions>
+                            
+                              <BOUCLE_traductions(RUBRIQUES){traduction}{lang=#ENV{lang}}>
+                                [(#GET{lang}|!={#ENV{lang}}|?{<?php header('Location: #URL_RUBRIQUE'); exit; ?>})]
+                              </BOUCLE_traductions>
+                            
+                            </B_traductions>
+                            <multi>[fr]<p><i>Cette rubrique n'est pas disponible en français.</i></p>[en]<p><i>This section is not available in english.</i></p></multi>
+                            <//B_traductions>
+                            
+                          </BOUCLE_existence>
+
+                            #SET{itterations, 0}
+
+							<BOUCLE_contenant(RUBRIQUES){id_parent= #_principale:ID_RUBRIQUE}{par num titre}>
+							<BOUCLE_contenu_art_avant(ARTICLES){id_rubrique = #_principale:ID_RUBRIQUE}{titre<#_contenant:RANG}{statut=publie}{tri_rubrique}{doublons}>
+
+							<div class="card">
+
+                                <div class="card-header" role="tab" id="heading#GET{itterations}">
+                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#collapse#GET{itterations}" aria-expanded="false"
+                                      aria-controls="collapse#GET{itterations}">
+                                      <h5 class="mb-0">
+                                        #TITRE <i class="fas fa-angle-down rotate-icon"></i>
+                                      </h5>
+                                    </a>
+                                  </div>
+
+                                <div id="collapse#GET{itterations}" class="collapse" role="tabpanel" aria-labelledby="heading#GET{itterations}"
+                                  data-parent="#accordionEx">
+                                  <div class="card-body">
+                                    #TEXTE
+                                    <a class="btn btn-publication btn-outline-primary btn-sm" href=#URL_ARTICLE><multi>[fr]Consulter l'article[en]Read the article</multi></a>
+                                  </div>
+                                </div>
+
+                            </div>
+                                
+                            #SET{itterations, #GET{itterations}|plus{1}}
+
+							 </BOUCLE_contenu_art_avant>
+							 
+                             <div class="card">
+
+                                <div class="card-header" role="tab" id="heading#GET{itterations}">
+                                    <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#collapse#GET{itterations}" aria-expanded="false"
+                                      aria-controls="collapse#GET{itterations}">
+                                      <h5 class="mb-0">
+                                        #TITRE <i class="fas fa-angle-down rotate-icon"></i>
+                                      </h5>
+                                    </a>
+                                  </div>
+
+                                <div id="collapse#GET{itterations}" class="collapse" role="tabpanel" aria-labelledby="heading#GET{itterations}"
+                                  data-parent="#accordionEx">
+                                  <div class="card-body">
+                                    <ul>
+                                        <BOUCLE_sous_rubrique(ARTICLES){id_rubrique = #_contenant:ID_RUBRIQUE}{tri_rubrique}>
+                                            <li>
+                                                <a href=#URL_ARTICLE><p>#TITRE</p></a>
+                                            </li>
+                                        </BOUCLE_sous_rubrique>
+                                    </ul>
+                                  </div>
+                                </div>
+
+                            </div>
+
+                            #SET{itterations, #GET{itterations}|plus{1}}
+
+							</BOUCLE_contenant>
+							<BOUCLE_contenu_apres(ARTICLES){id_rubrique = #_principale:ID_RUBRIQUE}{statut=publie}{tri_rubrique}{doublons}>
+
+                                <div class="card">
+
+                                    <div class="card-header" role="tab" id="heading#GET{itterations}">
+                                        <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#collapse#GET{itterations}" aria-expanded="false"
+                                          aria-controls="collapse#GET{itterations}">
+                                          <h5 class="mb-0">
+                                            #TITRE <i class="fas fa-angle-down rotate-icon"></i>
+                                          </h5>
+                                        </a>
+                                      </div>
+    
+                                    <div id="collapse#GET{itterations}" class="collapse" role="tabpanel" aria-labelledby="heading#GET{itterations}"
+                                      data-parent="#accordionEx">
+                                      <div class="card-body">
+                                        #TEXTE
+                                        <a class="btn btn-publication btn-outline-primary btn-sm" href=#URL_ARTICLE><multi>[fr]Consulter l'article[en]Read the article</multi></a>
+                                      </div>
+                                    </div>
+    
+                                </div>
+
+                                #SET{itterations, #GET{itterations}|plus{1}}
+								
+							</BOUCLE_contenu_apres>
+
+                    </div>
+                        </section>
+                    </div>
+				</div>
+						
+					</div>
+
+			<div class="footer" id="footer">
+				<div class="container">
+				<INCLURE{fond=footer/dist,env} />
+				</div>
+			</div>
+        </div>
+        
+	</body>
+	</html>
+</BOUCLE_principale>

@@ -1,0 +1,64 @@
+[(#REM) Menu de navigation dans la page ]
+
+<div class="row list-group">
+	#SET{articles,#ARRAY}
+	<BOUCLE_mere(ARTICLES){id_article}>
+
+		<BOUCLE_rub1(RUBRIQUES){id_rubrique}>
+
+			<BOUCLE_Rub_n1(RUBRIQUES){id_parent = #_rub1:ID_RUBRIQUE}{par num titre}>
+				
+				<BOUCLE_article_rub_n0_avant(ARTICLES){id_rubrique=#_rub1:ID_RUBRIQUE}{titre<#RANG}{statut=publie}{par titre}{doublons}>
+					#SET{articles, #GET{articles}|push{#ID_ARTICLE}}
+				</BOUCLE_article_rub_n0_avant>
+				<div class="col-12 col-sm-6 col-lg-4 aside-card">
+					<a href="#URL_RUBRIQUE">
+								<div class="list-group-item list-group-item-action d-flex align-items-center h-100">
+									<p style="margin: initial; margin-right: auto; margin-left:auto">[(#TITRE|couper{50})]</p>
+								</div>
+							</a>
+				</div>
+			</BOUCLE_Rub_n1>
+
+				<BOUCLE_article_rub_n0(ARTICLES){id_rubrique=#_rub1:ID_RUBRIQUE}{statut=publie}{par titre}{!par date}{doublons}>
+						
+					#SET{articles, #GET{articles}|push{#ID_ARTICLE}}
+				</BOUCLE_article_rub_n0>
+				
+			</BOUCLE_rub1>
+			
+	</BOUCLE_mere>
+
+	<B_listearticles>
+		#ANCRE_PAGINATION
+		<BOUCLE_listearticles(DATA) {source table, #GET{articles} } {pagination 9}>
+		[(#REM) Cette boucle vas lister tout les articles dans l'ordre qu'ils ont ete ajouté]
+
+		<BOUCLE_articles4(ARTICLES){id_article =#VALEUR}>
+		[(#REM) Cette boucle retourne l'article sélectionné dans la boucle englobante]
+		<BOUCLE_actives(CONDITION){si #ENV{id_article}|=={#ID_ARTICLE}}>
+						<div class="col-12 col-sm-6 col-lg-4 aside-card">
+							<a href="#URL_ARTICLE">
+								<div class="list-group-item activ d-flex align-items-center h-100">
+									<p style="margin: initial; margin-right: auto; margin-left:auto">[(#TITRE|couper{50})]</p>
+								</div>
+							</a>
+						</div>
+		</BOUCLE_actives>
+		<div class="col-12 col-sm-6 col-lg-4 aside-card">
+			<a href="#URL_ARTICLE">
+				<div class="list-group-item list-group-item-action d-flex align-items-center h-100">
+					<p style="margin: initial; margin-right: auto; margin-left:auto">[(#TITRE|couper{50})]</p>
+				</div>
+			</a>
+		</div>
+		<//B_actives>
+		</BOUCLE_articles4>
+		 
+		</BOUCLE_listearticles>
+		<div class="col-12">
+			[<p class="pagination"> (#PAGINATION)</p>]
+		</div>
+		</B_listearticles>
+</div>
+

@@ -1,0 +1,19 @@
+<script>
+function printDiv(divName) {
+      var printContents = "<div class='print'><div class='container'><div class='row'>";
+       printContents += "<div class='col-6'><h2 class='titre-header' style='max-width: 300px; text-align: left' >"+document.getElementsByClassName('titre-header')[0].innerHTML+"</h2></div>";
+       printContents += "<div class='col-6' style='text-align: end; margin: auto'><img src='squelettes/img/logop8_noir.png' style='height: 45px; width: auto;'></div></div>";
+      printContents += "<h2 class='titre titre-principal'>"+document.getElementsByClassName('titre-principal')[0].innerHTML+"</h2>";  
+      printContents += document.getElementsByClassName(divName)[0].innerHTML;
+      try {
+      printContents += "<div class='ps' style='color: #212529'>"+document.getElementsByClassName('ps')[0].innerHTML+"</div>";
+      } catch (error) {
+         console.error(error);
+      }    
+      printContents += "</div></div>";
+      var originalContents = document.body.innerHTML;      
+      document.body.innerHTML = printContents;  
+      window.print();     
+      document.body.innerHTML = originalContents;
+   }
+</script>

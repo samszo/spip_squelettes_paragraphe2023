@@ -1,0 +1,77 @@
+<style>
+.line
+{
+border-bottom: solid 2px var(--main-titre-color);
+width: 50%;border-top: inherit;
+margin: 1em 0em;
+}
+
+.cl_rub{
+font-size : 1.5em;
+margin-bottom:2em;
+}
+.cl_rub a {color : var(--main-color);font-weight: 399;}
+.ps a, .ps p a{color:#fff;}
+</style>
+<BOUCLE_principale(RUBRIQUES){id_rubrique}>
+	
+		<section class="main-content col-12 content-membre">
+			<h2 class="titre titre-principal">#TITRE</h2>
+			<div class="pagination-membre">
+				<div class="main main-membre" style="overflow: hidden;">
+					<INCLURE{fond=inclure/options-article-onglets, id_rubrique} />
+
+					<BOUCLE_existence(RUBRIQUES){id_rubrique=#ENV{id_rubrique}}>
+						#SET{lang,#LANG}
+						<B_traductions>
+						
+							<BOUCLE_traductions(RUBRIQUES){traduction}{lang=#ENV{lang}}>
+								[(#GET{lang}|!={#ENV{lang}}|?{<?php header('Location: #URL_RUBRIQUE'); exit; ?>})]
+							</BOUCLE_traductions>
+						
+						</B_traductions>
+						<multi>[fr]<p><i>Cette rubrique n'est pas disponible en français.</i></p>[en]<p><i>This section is not available in english.</i></p></multi>
+						<//B_traductions>
+						
+					</BOUCLE_existence>
+
+					<div class="row">
+
+						<BOUCLE_contenant(RUBRIQUES){id_parent= #_principale:ID_RUBRIQUE}{par num titre}>
+							<BOUCLE_contenu_art_avant(ARTICLES){id_rubrique = #_principale:ID_RUBRIQUE}{titre<#_contenant:RANG}{par num titre}{doublons}>
+		
+							<div class="col-lg-4 col-md-4 col-sm-6 col-12">	
+								<hr class="line">
+								<h3 class="cl_rub"><a href="#URL_ARTICLE">#TITRE</a></h3>
+							</div>
+
+							</BOUCLE_contenu_art_avant>
+							
+							<div class="col-lg-4 col-md-4 col-sm-6 col-12">
+								<hr class="line">
+								<h3 class="cl_rub"><a href="#URL_RUBRIQUE">#TITRE</a></h3>
+							</div>
+						</BOUCLE_contenant>
+						
+						<BOUCLE_contenu_apres(ARTICLES){id_rubrique = #_principale:ID_RUBRIQUE}{statut=publie}{par num titre}{doublons}>
+
+							<div class="col-lg-4 col-md-4 col-sm-6 col-12">	
+								<hr class="line">
+								<h3 class="cl_rub"><a href="#URL_ARTICLE">#TITRE</a></h3>
+							</div>
+
+						</BOUCLE_contenu_apres>
+
+					</div>
+
+				</div>
+
+			</div>
+			
+		</section>
+		
+</BOUCLE_principale>
+
+<aside class="aside-content col-12 hideme-scroll">
+	<INCLURE{fond=aside/rubrique-content,env}>
+</aside>

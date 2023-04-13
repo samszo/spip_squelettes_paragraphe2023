@@ -1,0 +1,44 @@
+<BOUCLE_principale(ARTICLES){id_article}>
+	<!DOCTYPE html> 
+	<html lang="fr" xmlns:og="http://ogp.me/ns#">
+	<head>
+		<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)] - Université Paris 8</title>
+		[<meta name="description" content="(#DESCRIPTIF|sinon{#INTRODUCTION}|couper{150}|textebrut)">]
+
+			<meta property="og:url" content="[(#URL_ARTICLE|url_absolue)]" />
+			<meta property="og:type" content="article" />
+			[<meta property="og:title" content="(#TITRE|texte_backend)" />]
+			[<meta property="og:description" content="(#INTRODUCTION{300}|attribut_html)" />]
+			[<meta property="og:image" content="#URL_SITE_SPIP/IMG/(#LOGO_ARTICLE**)" />]
+			[<meta property="og:image:alt" content="#URL_SITE_SPIP/IMG/(#LOGO_ARTICLE**)" />]
+			
+			
+			<meta name="twitter:site" content="@UnivParis8">
+			<meta name="twitter:app:country" content="FR" />
+			<meta name="twitter:creator" content="@UnivParis8" />
+			<meta name="twitter:title" content="#TITRE">
+			<meta name="twitter:description" content="[(#INTRODUCTION{350}|attribut_html)]">
+			<meta name="twitter:url" content="[(#URL_ARTICLE|url_absolue)]" />
+			<meta name="twitter:image" content="[#URL_SITE_SPIP/IMG/(#LOGO_ARTICLE**)]">
+
+		<INCLURE{fond=head/dist, env} />
+		<INCLURE{fond=inclure/animation-js,env} />
+		<INCLURE{fond=inclure/back-to-top-js,env} />
+		<INCLURE{fond=inclure/print-js,env} />
+		<INCLURE{fond=inclure/font-size,env} />
+		
+	</head>
+
+	<body class="pas_surlignable page_article">
+		
+    <?php
+        header('Location: #URL_RUBRIQUE');
+        exit;
+    ?>
+
+	<script>
+		$("span.spip_documents_center").parents('p').css("text-align", "center");
+	</script>
+	</body>
+	</html>
+</BOUCLE_principale>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<title>[(#NOM_SITE_SPIP|textebrut)] - Université Paris 8</title>
+	[<meta name="description" http-equiv="Content-Type" content="text/html; charset=utf-8" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
+	<INCLURE{fond=head/dist,env} />
+	<INCLURE{fond=inclure/animation-js,env} />
+	<INCLURE{fond=inclure/back-to-top-js,env} />
+</head>
+
+<body data-spy="scroll" data-target=".doc-sidebar">
+
+	<div class="page">
+        
+			<a id="top-button" alt="Haut de page"></a>
+			
+			<div class="topnav" id="top-header">
+				<INCLURE{fond=inclure/top,env} />
+			</div>
+			
+        	<div id="p8"><a class="website-brand" href="#URL_SITE_SPIP"><img src ="squelettes/img/logop8_noir.png" alt="#NOM_SITE_SPIP"></a></div>
+		[<div class="navigation" id="navbar">
+			(#INCLURE{fond=inclure/menu,env})
+		</div>]
+		
+
+		<div class="header" id="header">
+			 <INCLURE{fond=header/dist,env} /> 
+		</div>
+		
+		
+		<div class="wrapper" id="wrapper">
+			<div class="content primary" id="content">
+				<INCLURE{fond=breadcrumb/sommaire,env} />
+				<INCLURE{fond=content/sommaire,env} />
+			</div>
+		</div>
+			
+		
+
+		<div class="footer" id="footer">
+			<div class="container">
+				<INCLURE{fond=footer/dist,env} />
+			</div>
+			
+		</div>
+	</div>
+
+<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="squelettes/slick/slick.min.js"></script>
+
+<script type="text/javascript">
+
+
+	$(document).ready(function(){
+	  $(".slider").slick({
+	  	arrows: false,
+	  dots: true,
+	  centerMode: true,
+	   autoplay : true,
+	  autoplaySpeed: 2000,
+	  initialSlide: 0,
+	  centerPadding:0,
+	  infinite: true,
+	  cssEase: 'ease',
+	  slidesToShow: 3,
+		slidesToScroll: 3,
+		responsive: [
+		  {
+			breakpoint: 981,
+			settings: {
+			  slidesToShow: 2,
+			  slidesToScroll: 2,
+			  infinite: true,
+			  dots: true
+			}
+		  },
+		  {
+			breakpoint: 737,
+			settings: {
+			  slidesToShow: 1,
+			  slidesToScroll: 1
+			}
+		  }
+
+		]
+	 
+		});
+  });
+  </script>
+
+	<script>
+		$('.img-responsive').each(function(){           // Note: {.post-thumb img} is css selector of the image tag
+    var t = $(this),
+        s = 'url(' + t.attr('src') + ')',
+        p = t.parent(),
+        d = $('<div class="actu-img"></div>');
+    t.hide();
+    p.append(d);
+    d.css({
+        'height'                : 220,          // Note: You can change it for your needs
+        'background-size'       : 'cover',
+        'background-repeat'     : 'no-repeat',
+        'background-position'   : 'center',
+        'background-image'      : s
+    });
+});
+	</script>
+
+</body>
+</html>
+

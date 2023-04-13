@@ -1,0 +1,16 @@
+<script>
+
+    function fontSizeMinus(divName) {
+    newFontSize = decrSize($("."+divName+"").css("font-size"), 0.25, 0.5, 2)
+    $("."+divName+"").css("font-size", newFontSize);
+}
+
+function decrSize(currentSize, incr, min, max) {
+  if (parseFloat(currentSize)/16 == min){
+    return;
+  }
+  fSize = (parseFloat(currentSize)/16 - incr);
+  return (fSize) + 'em';
+}
+
+</script>

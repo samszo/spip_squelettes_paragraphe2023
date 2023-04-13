@@ -1,0 +1,39 @@
+<BOUCLE_content(ARTICLES){id_article}{statut=publie}>
+[(#PS|choixsivide{<article class="main-content hideme col-12">, <article class="main-content hideme col-12 col-md-8">})]
+	<h2 class="titre titre-principal">#TITRE</h2>
+	<hr>
+	<INCLURE{fond=inclure/options-article,env} />
+
+	<BOUCLE_existence(ARTICLES){id_article=#ENV{id_article}}>
+
+		<B_traductions>
+		
+			<BOUCLE_traductions(ARTICLES){traduction}{lang=#ENV{lang}}>
+				
+			</BOUCLE_traductions>
+		
+		</B_traductions>
+		<multi>[fr]<br><p><i>Cet article n'est pas disponible en français.</i></p>[en]<br><p><i>This article is not available in english.</i></p></multi>
+		<//B_traductions>
+		
+	</BOUCLE_existence>
+
+	<div class="main main-article">
+		[<div class=" texte surlignable">(#TEXTE|choixsivide{"Aucun contenu n'a été renseigné pour cet article pour le moment...", #TEXTE})</div>]
+	</div>
+	<hr>
+</article>
+
+[(#PS|?{<div class="col-12 col-md-4 hideme">
+	<div class="ps">
+		#PS
+	</div>
+</div>,})]
+
+</BOUCLE_content>
+
+<aside class="aside-content col-12 hideme-scroll">
+	
+	<h2 class="titre" style="margin-top: 1em; margin-bottom: 1em"><multi>[fr]À lire aussi[en]More to read</multi></h2>
+	<INCLURE{fond=aside/article, env}/>
+</aside>

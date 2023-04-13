@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset='utf-8' />
+<link href='squelettes/fullcalendar/lib/main.css' rel='stylesheet' />
+<script src='squelettes/fullcalendar/lib/moment-with-locales.min.js'></script>
+<script src='squelettes/fullcalendar/lib/main.js'></script>
+<script src='squelettes/fullcalendar/lib/locales-all.js'></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+</script>
+
+
+
+<script>
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var initialLocaleCode = "[(#ENV{lang})]";
+    var calendarEl = document.getElementById('calendar');
+
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      headerToolbar: {
+        right: 'prev,next today',
+        left: 'title',
+        
+      },
+      footerToolbar:{
+        left: 'custom',
+        right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth',
+      }, 
+      customButtons: {
+        custom:{
+          text: 'Export',
+          click: function(){
+            window.open("spip.php?page=ical");
+          }
+        }
+      },
+      locale: initialLocaleCode,
+      navLinks: true, // can click day/week names to navigate views
+      businessHours: true, // display business hours
+      editable: true,
+      selectable: true,
+      events: "[(#URL_PAGE{agenda.json})]",
+      eventDidMount: function(info) {
+        $(info.el).tooltip({ title: info.event.title });
+ }
+    });
+
+    calendar.render();
+  });
+
+
+
+</script>
+
+<style>
+
+  #calendar {
+    max-width: 1100px;
+    margin: 0 auto;
+    color:#fff;
+  }
+
+
+</style>
+</head>
+<body>
+
+
+  <div id='calendar'></div>
+
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!-- /!\ FOOTER /!\ -->
+
+<!-- On affiche le nom du site -->
+<h2 class="titre titre-principal" style="font-size: 2rem; text-align:center">[(#NOM_SITE_SPIP)]</h2>
+
+<div class="row">
+
+        <!-- Menu -->
+        <div class="middle col-12 col-md-4 " style="text-align:center; margin-bottom: 1em">
+
+        <h3 class="titre titre-tertiaire">Menu</h3>
+
+        <!-- On affiche les rubriques de la navbar-->
+        <BOUCLE_rub(RUBRIQUES){racine}{lang}{id_rubrique!=107}>
+            <BOUCLE_rub1(RUBRIQUES){id_parent}{par num titre}>
+                <div class="menu-item">
+                    <a href="#URL_RUBRIQUE" class="titre-item">#TITRE</a>
+                </div>
+            </BOUCLE_rub1>
+        </BOUCLE_rub>
+        <!-- On affiche les rubriques de la navbar-->
+
+        </div>
+        <!-- Menu -->
+
+        <!-- Infos -->
+        <div class="middle col-12 col-md-4" style="text-align:center; margin-bottom: 1em">
+
+        <h3 class="titre titre-tertiaire"><multi>[fr]Infos[en]Info</multi></h3>
+
+        <BOUCLE_footer_infos(ARTICLES){id_rubrique = 107}>
+            <a class="test3" href="#URL_ARTICLE" >#TITRE</a>
+            <br>
+        </BOUCLE_footer_infos>
+        <div class="menu-item">
+            <a class="test3" href="spip.php?page=plan">Plan du site</a>
+        </div>
+        
+           
+        <BOUCLE_footer_contact(ARTICLES){id_rubrique= 530}>
+            <div class="menu-item">
+            <a class="test3" href="#URL_ARTICLE">#TITRE</a>
+            </div>
+        </BOUCLE_footer_contact>
+         
+        
+    </div>
+
+        <!-- Infos -->
+
+        <!-- Réseaux sociaux -->
+        <div class="mid col-12 col-md-4" style="text-align:center; margin-bottom: 1em">
+
+        <h3 class="titre titre-tertiaire"><multi>[fr]Suivez-Nous[en]Follow us</multi></h3>
+
+        <ul class="socials-menu">
+
+                <li>
+                    <a href="https://twitter.com/UnivParis8" class="#TITRE">
+                        <img src="squelettes/img/twitter_nl.png" alt="#TITRE">
+                        <span class="icon"></span>
+                    </a></li>
+
+                <li>
+                    <a href="https://www.facebook.com/Paris8" class="#TITRE">
+                        <img src="squelettes/img/facebook_nl.png" alt="#TITRE">
+                        <span class="icon"></span>
+                    </a></li>
+
+                <li>
+                    <a href="https://www.instagram.com/univparis8/" class="#TITRE">
+                        <img src="squelettes/img/instagram_nl.png" alt="#TITRE">
+                        <span class="icon"></span>
+                    </a></li>
+
+                <li>
+                    <a href="https://vimeo.com/paris8webtv" class="#TITRE">
+                        <img src="squelettes/img/vimeo.png" alt="#TITRE">
+                        <span class="icon"></span>
+                    </a></li>
+            
+            <li>
+                <a class="rss" href="#URL_SITE_SPIP/?page=backend" title="Suivez notre flux RSS" target="_blank">
+                    <img src="squelettes/img/rss_nl.png" />
+                    <span class="icon"></span>
+                </a>
+                
+            </li>
+        </ul>
+
+        </div> 
+        <!-- Réseaux sociaux -->
+
+    </div>
+</div>
+<hr>
+<div class=" footer-content">
+
+   <p class="test2">2 Rue de la Liberté, 93200 Saint-Denis<br><multi>[fr]Tel : +33(0)1 49 40 67 89 [en]Phone : +33(0)1 49 40 67 89</multi><br>Fax : +33(0) 1 48 21 04 46<br></p>
+    
+    <p class="test2"><multi>[fr]Université Paris 8 ©2020 - Tous droits réservés[en]Université Paris 8 ©2020 - All rights reserved</multi></p>  
+
+    <div class=" test footer-menu">
+        <p class="credits"><small><multi>[fr]Code et documentation sous licence [en]Code and documentation under licence </multi><a href="https://www.gnu.org/licenses/gpl-3.0.html">GPL 3</a></small><small><span class="sep"> - </span><a href="https://www.spip.net/" title="<:site_realise_avec_spip:>">SPIP</a><span class="sep"> - </span><a href="https://twitter.github.com/bootstrap/" >BootStrap</small></a></p>
+    </div>
+</div>
+
+<!-- /!\ FOOTER /!\ -->
+
+
+

@@ -1,0 +1,16 @@
+<script>
+
+    function fontSizePlus(divName) {
+    newFontSize = incSize($("."+divName+"").css("font-size"), 0.25, 0.5, 2)
+    $("."+divName+"").css("font-size", newFontSize);
+}
+
+function incSize(currentSize, incr, min, max) {
+  if (parseFloat(currentSize)/16 == max){
+    return ;
+  }
+  fSize = (parseFloat(currentSize)/16 + incr);
+  return (fSize) + 'em';
+}
+
+</script>

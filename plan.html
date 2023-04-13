@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+[(#REM) Cf.: http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+]<!--[if lt IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie6"> <![endif]-->
+<!--[if IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie7"> <![endif]-->
+<!--[if IE 8 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie8"> <![endif]-->
+<!--[if IE 9 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> 
+<html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]-->
+    
+    <head>
+        <script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+        <title><:plan_site:> - [(#NOM_SITE_SPIP|textebrut)] - Université Paris 8</title>
+        [<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|attribut_html)" />]
+        <INCLURE{fond=head/dist,env}>       
+
+    </head>
+
+    <body class="pas_surlignable page_plan" >
+        <div class="page">
+
+            <a id="top-button" alt="Haut de page"></a>
+
+            <div class="topnav" id="top-header">
+				<INCLURE{fond=inclure/top,env} />
+            </div>
+            
+            <div id="p8"><a class="website-brand" href="#URL_SITE_SPIP"><img src ="squelettes/img/logop8_noir.png" alt="#NOM_SITE_SPIP"></a></div>
+            [<div class="navigation" id="navbar">
+                (#INCLURE{fond=inclure/menu,env})
+            </div>]
+            
+           <div class="header ajust" id="header">
+               
+                    <INCLURE{fond=header/dist,env} />
+               
+            </div>
+
+            <div class="container">
+                <div class="wrapper" id="wrapper">
+                <INCLURE{fond=breadcrumb/plan,env} />
+                #MODELE{plan}
+                </div>
+            </div>
+
+
+            <div class="footer" id="footer">
+                <div class="container">
+                    <INCLURE{fond=footer/dist,env} />
+                </div>
+            </div>
+
+        </div><!--.page-->
+    </body>
+            
+</html>

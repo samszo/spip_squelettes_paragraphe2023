@@ -1,0 +1,127 @@
+<nav class="navbar navbar-expand-lg" style="background-color: #d0caca; color: #fff;padding: 0.15rem 1rem;">
+  
+  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" id="hamburger">
+    <span class="navbar-toggler-icon" id="top-hamburger"></span>
+  </button>
+
+  #MENU_LANG 
+
+  <button style="color: #7c7c7d" class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#top" aria-controls="top" aria-expanded="false" aria-label="Toggle navigation">
+    <i class="fas fa-plus"></i>
+  </button>
+
+    <div class="collapse navbar-collapse nav-principal " id="top">
+      <ul class="nav navbar-nav" id="top-ul">
+        <span class="p8">
+        <li class=" nav-item dropdown ">
+            <a href="https://www.bu.univ-paris8.fr/"><multi>[fr]Bibliothèque[en]Library</multi></a>
+        </li>
+        <li class=" nav-item dropdown ">
+            <a href="https://portail.univ-paris8.fr/bdc/"><multi>[fr]Wikip8[en]Wikip8</multi></a>
+        </li>
+        <li class=" nav-item dropdown ">
+            <a href="https://e-p8.univ-paris8.fr/"><multi>[fr]Espace Perso[en]Personal Space</multi></a>
+        </li>
+      </span>
+
+        <span class="rs">
+          <li class=" nav-item dropdown ">
+            <a href="https://twitter.com/UnivParis8"><i class="fab fa-twitter"></i></a>
+          </li>
+          <li class=" nav-item dropdown ">
+            <a href="https://facebook.com/Paris8"><i class="fab fa-facebook-f"></i></a>
+          </li>
+          <li class=" nav-item dropdown ">
+            <a href="https://vimeo.com/paris8webtv"><i class="fab fa-vimeo-v"></i></a>
+          </li>
+          <li class=" nav-item dropdown ">
+            <a href="https://www.linkedin.com/company/universit-paris-8-vincennes-saint-denis/"><i class="fab fa-linkedin-in"></i></a>
+          </li>
+          <li class=" nav-item dropdown ">
+            <a href="https://www.instagram.com/univparis8/"><i class="fab fa-instagram"></i></a>
+          </li>
+        </span>
+
+        <span class="srch">
+        <li class=" nav-item dropdown ">
+        <a id="searchbtn" href="#"><i class="fas fa-search" id="btn"></i></a>
+      </li>
+    </span>
+      </ul>
+    </div>
+
+  <div class="collapse navbar-collapse nav-principal " id="navbarNavDropdown" >
+    <ul class="nav navbar-nav mr-auto">
+
+<BOUCLE_rub(RUBRIQUES){racine}{lang}{id_rubrique!=107}>
+<BOUCLE_rub1(RUBRIQUES){id_parent}{par num titre}>
+
+                  <li class=" nav-item dropdown ">
+            <a href="#URL_RUBRIQUE"  class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #fff">#TITRE <b class="caret"></b></a>
+            <ul class="dropdown-menu" >
+
+        <BOUCLE_Rub_n1(RUBRIQUES){id_parent = #_rub1:ID_RUBRIQUE}{par num titre}>
+
+        <BOUCLE_article_rub_n0_avant(ARTICLES){id_rubrique=#_rub1:ID_RUBRIQUE}{titre<#RANG}{statut=publie}{par num titre}{doublons}>
+        <li><a class="dropdown-item" href="#URL_ARTICLE">#TITRE</a></li>
+        </BOUCLE_article_rub_n0_avant>
+        <li><a class=" dropdown-item" href="#URL_RUBRIQUE">#TITRE</a></li>
+      </BOUCLE_Rub_n1>
+
+      <BOUCLE_article_rub_n0(ARTICLES){id_rubrique=#_rub1:ID_RUBRIQUE}{statut=publie}{par num titre}{!par date}{doublons}>
+      <li><a class="dropdown-item" href="#URL_ARTICLE">#TITRE</a></li>
+      </BOUCLE_article_rub_n0>
+                  </ul>
+          </li>
+
+</BOUCLE_rub1>
+</BOUCLE_rub>
+    </ul>
+  </div>
+    
+  </div>
+  
+
+
+
+</nav>
+   <!-- Bandeau de recherche -->
+   <form class="form-inline form-recherche" id="searchbar" action="spip.php?page=recherche" method="get" style="display: none">
+    
+    <!-- Champ de texte -->
+    [(#ENV{lang}|=={en}|?{<input type="text" name="recherche" class="search-input form-control mr-sm-2" placeholder="Search" />,<input type="text" name="recherche" class="search-input form-control mr-sm-2" placeholder="Rechercher" />})]
+    
+    
+    <!-- Champ de texte -->
+
+    <!-- Bouton pour valider la recherche -->
+    <button class="btn btn-outline-success my-2 my-sm-0" id="validatesearch" class="search-icon" onclick="searchToggle(this, event);">
+       <i class="fas fa-search"></i>
+    </button>
+    <!-- Bouton pour valider la recherche -->
+          
+    <input name="page" value="recherche" type="hidden"/>
+    <span class="close" onclick="searchToggle(this, event);"></span>
+        
+  </form>
+  <!-- Bandeau de recherche -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script>
+
+        $(document).ready(function() {
+          $(document).on('click', "#btn", function() {
+            $("#searchbar").toggle("slow");
+            return false;
+          });
+        });
+
+        $(document).ready(function() {
+          $(document).on("click", "#btn2", function() {
+            $("#searchbar").toggle("slow");
+            return false;
+          });
+        });
+
+</script>
+

@@ -1,0 +1,94 @@
+<BOUCLE_principale(ARTICLES){id_article}>
+	<!DOCTYPE html> 
+	<html lang="fr" xmlns:og="http://ogp.me/ns#">
+	<head>
+		<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)] - Université Paris 8</title>
+		[<meta name="description" content="(#DESCRIPTIF|sinon{#INTRODUCTION}|couper{150}|textebrut)">]
+
+			<meta property="og:url" content="[(#URL_ARTICLE|url_absolue)]" />
+			<meta property="og:type" content="article" />
+			[<meta property="og:title" content="(#TITRE|texte_backend)" />]
+			[<meta property="og:description" content="(#INTRODUCTION{300}|attribut_html)" />]
+			[<meta property="og:image" content="#URL_SITE_SPIP/IMG/(#LOGO_ARTICLE**)" />]
+			[<meta property="og:image:alt" content="#URL_SITE_SPIP/IMG/(#LOGO_ARTICLE**)" />]
+			
+			
+			<meta name="twitter:site" content="@UnivParis8">
+			<meta name="twitter:app:country" content="FR" />
+			<meta name="twitter:creator" content="@UnivParis8" />
+			<meta name="twitter:title" content="#TITRE">
+			<meta name="twitter:description" content="[(#INTRODUCTION{350}|attribut_html)]">
+			<meta name="twitter:url" content="[(#URL_ARTICLE|url_absolue)]" />
+			<meta name="twitter:image" content="[#URL_SITE_SPIP/IMG/(#LOGO_ARTICLE**)]">
+
+		<INCLURE{fond=head/dist, env} />
+		<INCLURE{fond=inclure/animation-js,env} />
+		<INCLURE{fond=inclure/back-to-top-js,env} />
+		<INCLURE{fond=inclure/print-js,env} />
+		<INCLURE{fond=inclure/font-size-plus,env} />
+		<INCLURE{fond=inclure/font-size-minus,env} />
+		<style>
+			.spip_logo{width: inherit;}
+		</style>
+	</head>
+
+	<BOUCLE_existence(ARTICLES){id_article=#ENV{id_article}}>
+		#SET{lang,#LANG}
+		#SET{id_rubrique,#ID_RUBRIQUE}
+		<B_traductions>
+        
+			<BOUCLE_traductions(ARTICLES){traduction}{lang=#ENV{lang}}>
+				[(#GET{lang}|!={#ENV{lang}}|?{<?php header('Location: #URL_ARTICLE'); exit; ?>})]
+			</BOUCLE_traductions>
+        
+		</B_traductions>
+
+		<//B_traductions>
+		
+	</BOUCLE_existence>
+
+	<body class="pas_surlignable page_article">
+		
+	<div class="page">
+		<a id="top-button"></a>
+
+		<div class="topnav" id="top-header">
+			<INCLURE{fond=inclure/top,env} />
+		</div>
+
+		<div id="p8"><a class="website-brand" href="#URL_SITE_SPIP"><img src ="squelettes/img/logop8_noir.png" alt="#NOM_SITE_SPIP"></a></div>
+		[<div class="navigation" id="navbar">
+				(#INCLURE{fond=inclure/menu,env})
+		</div>]
+		
+		<div id="header"class="header">
+			
+				<INCLURE{fond=header/article, env} />
+			
+		</div>
+		
+		<div class="container">
+			<INCLURE{fond=breadcrumb/rubrique,env} />
+			
+			<div class="wrapper" id="wrapper">
+				<div class="primary container-content row" id="content">
+						
+							<INCLURE{fond=content/article,env}/>
+
+				</div>
+			</div>
+		</div>
+
+		<div class="footer">
+			<div class="container">
+			<INCLURE{fond=footer/dist,env} />
+			</div>
+		</div>
+
+	</div><!--.page-->
+	<script>
+		$("span.spip_documents_center").parents('p').css("text-align", "center");
+	</script>
+	</body>
+	</html>
+</BOUCLE_principale>

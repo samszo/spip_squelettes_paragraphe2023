@@ -1,0 +1,203 @@
+﻿<div class="container" style="margin-bottom:1em;">
+	<div class="row hideme">
+
+		<div class="col-lg-8 col-md-12">
+			<div class="contact-sommaire ">
+				<BOUCLE_transcrit(ARTICLES){id_article = 1092}>
+
+					<B_traductions>
+
+						<BOUCLE_traductions(ARTICLES){traduction}{lang=#ENV{lang}}>
+
+							<h2>#TITRE</h2>
+
+							<div>#CHAPO</div>
+
+						</BOUCLE_traductions>
+
+					</B_traductions>
+
+				<h2>#TITRE</h2>
+				[(#ENV{lang}|=={en}|?{<div><p><I>This article is not available in english.</I></p></div>,})]
+				<div>#CHAPO</div>
+
+				<//B_traductions>
+
+				</BOUCLE_transcrit>
+			</div>
+		</div>
+
+		<div class="col-lg-4 col-md-12">
+			<div class="contact-sommaire ">
+				<BOUCLE_contact(ARTICLES){id_article = 808}>
+					<B_traductions2>
+						<BOUCLE_traductions2(ARTICLES){traduction}{lang=#ENV{lang}}>
+
+						<h2>#TITRE</h2>
+
+						<div>#CHAPO</div>
+
+						</BOUCLE_traductions2>
+					</B_traductions2>
+
+					<h2>#TITRE</h2>
+					[(#ENV{lang}|=={en}|?{<div><p><I>This article is not available in english.</I></p></div>,})]
+					<div>#CHAPO</div>
+
+					<//B_traductions2>
+
+				</BOUCLE_contact>	
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<div class="container-fluid" style="background-color:#c2000b;padding:0 0 2em 0;margin-bottom:1em;">
+	<div class="container">
+		<BOUCLE_actualite(RUBRIQUES){id_rubrique = 3}>
+
+			<B_traductions3>
+			<BOUCLE_traductions3(RUBRIQUES){traduction}{lang=#ENV{lang}}>
+
+			<h2 class="titre-fluid">#TITRE à venir</h2>
+				<div class="row hideme-scroll">
+					<BOUCLE_evts(EVENEMENTS){age<=7}{par date_debut}{id_parent}>
+					<div class="actu col-md-4 col-12">
+					<a href="#URL_ARTICLE">[(#LOGO_ARTICLE_RUBRIQUE|inserer_attribut{class, img-responsive})]</a>
+
+					<a class="titre-fluid" href="#URL_ARTICLE">
+						
+						<div style="border:solid 1px #fff;">
+							<h5 style="margin: auto" class="actu-title">[(#TITRE)]</h5>
+							<hr>
+							<p style="font-size:.8em;">
+									<i class="fab fa-algolia"></i>
+							[
+							(#_evts:DATE_DEBUT|affdate)
+								[(#_evts:DATE_DEBUT|heures|=={00}|non)]
+								[<i class="fas fa-long-arrow-alt-right"></i> (#_evts:DATE_DEBUT|heures)h]
+								[(#_evts:DATE_DEBUT|minutes)] [à (#_evts:DATE_FIN|heures)h]
+								[(#_evts:DATE_FIN|minutes)]
+							]
+							</p>
+						</div>
+						
+					</a>
+				
+					</div>
+					</BOUCLE_evts>
+				</div>
+
+			</BOUCLE_traductions3>
+			</B_traductions3>
+
+			<h2 class="titre-fluid">#TITRE à venir</h2>
+			[(#ENV{lang}|=={en}|?{<div style="text-align: center"><p><I>This section is not available in english.</I></p></div>,})]
+			<div class="row hideme-scroll">
+				<BOUCLE_evts2(EVENEMENTS){age<=7}{id_parent}{par date_debut}>
+				<div class="actu col-md-4 col-12">
+					<a href="#URL_ARTICLE">[(#LOGO_ARTICLE_RUBRIQUE|inserer_attribut{class, img-responsive})]</a>
+					<a class="titre-fluid" href="#URL_ARTICLE">
+
+						<div style="border:solid 1px #fff;">
+							<h5 style="margin: auto" class="actu-title">[(#TITRE)]</h5>
+
+							<hr>
+							<p style="font-size:.8em;">
+									<i class="fab fa-algolia"></i>
+							[
+							(#_evts:DATE_DEBUT|affdate)
+								[(#_evts:DATE_DEBUT|heures|=={00}|non)]
+								[<i class="fas fa-long-arrow-alt-right"></i> (#_evts:DATE_DEBUT|heures)h]
+								[(#_evts:DATE_DEBUT|minutes)] [à (#_evts:DATE_FIN|heures)h]
+								[(#_evts:DATE_FIN|minutes)]
+							]
+							</p>
+						</div>
+					</a>	
+				</div>
+				</BOUCLE_evts2>
+			</div>
+
+			<//B_traductions3>
+		</BOUCLE_actualite>
+	</div>
+</div>
+
+<div class="container" style="margin-bottom:1em;">
+	<div class="sommaire-carousel hideme">
+		<h2 class="titre titre-principal titre-sommaire"><multi>[fr]Actualités[en]News</multi></h2>
+		<INCLURE{fond=inclure/carousel} />
+	</div>
+</div>
+
+<div class="container" style="margin-bottom:1em;">
+	<BOUCLE_publications(RUBRIQUES){id_rubrique=591}>
+
+		<B_traductions4>
+
+		<BOUCLE_traductions4(RUBRIQUES){traduction}{lang=#ENV{lang}}>
+
+		<h2 class="titre titre-principal titre-sommaire">#TITRE</h2>
+		<div class="row hideme-scroll">
+		<BOUCLE_publications2(ARTICLES){branche}{0,3}{!par date}>
+		<div class="actu col-md-4 col-12">
+		<a href="#URL_ARTICLE">[(#LOGO_ARTICLE_RUBRIQUE|inserer_attribut{class, img-responsive})]</a>
+		<a class="actu-title" href="#URL_ARTICLE">
+		<div class="x x-sommaire">
+		<h5 style="margin: auto" class="actu-title">[(#TITRE)]</h5>
+		</div>
+		</a>
+		</div>
+		</BOUCLE_publications2>
+		</div>
+
+		</BOUCLE_traductions4>
+
+		</B_traductions4>
+
+		<h2 class="titre titre-principal titre-sommaire">#TITRE</h2>
+		[(#ENV{lang}|=={en}|?{<div style="text-align: center"><p><I>This section is not available in english.</I></p></div>,})]
+
+		<div class="row hideme-scroll">
+			<BOUCLE_publications3(ARTICLES){id_rubrique}{0,3}{!par date}>
+			<div class="actu col-md-4 col-12">
+			<a href="#URL_ARTICLE">[(#LOGO_ARTICLE_RUBRIQUE|inserer_attribut{class, img-responsive})]</a>
+			<a class="actu-title" href="#URL_ARTICLE">
+			<div class="x x-sommaire">
+			<h5 style="margin: auto" class="actu-title">[(#TITRE)]</h5>
+			</div>
+			</a>
+			</div>
+			</BOUCLE_publications3>
+		</div>
+		<//B_traductions4>
+	</BOUCLE_publications>
+</div>
+
+<div class="container-fluid" style="background-color:#c2000b;padding:0 0 2em 0;margin-bottom:1em;">
+	<div class="container">
+		<h2 class="titre-fluid"><multi>[fr]Axes de recherche[en]Research Groups</multi></h2>
+		
+		
+		<div class="row hideme-scroll">
+			<BOUCLE_actus(RUBRIQUES){id_mot=112}{lang=#ENV{lang}}{!par date}{0,6}>
+
+				<div class="actu col-md-4 col-12">
+				<a href="#URL_RUBRIQUE">[(#LOGO_ARTICLE_RUBRIQUE|inserer_attribut{class, img-responsive})]</a>
+				<a class="titre-fluid" href="#URL_RUBRIQUE">
+				<div class="x x-sommaire">
+				<h5 style="margin: auto" class="actu-title">[(#TITRE|couper{50})]</h5>
+				</div>
+				</a>
+				</div>						
+
+			</BOUCLE_actus>
+		</div>
+	</div>
+</div>
+
+<style>
+	.titre-fluid{text-align: center;color:#fff;padding:.5em 0;}
+</style>

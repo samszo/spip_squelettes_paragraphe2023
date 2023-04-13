@@ -1,0 +1,145 @@
+<BOUCLE_principale(ARTICLES){id_article}>
+	<!DOCTYPE html> 
+	<html lang="fr" xmlns:og="http://ogp.me/ns#">
+	<head>
+		<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)] - Université Paris 8</title>
+		[<meta name="description" content="(#DESCRIPTIF|sinon{#INTRODUCTION}|couper{150}|textebrut)">]
+		<BOUCLE_meta(ARTICLES){id_article}{statut=publie}>
+			<meta property="og:url" content="[(#URL_ARTICLE|url_absolue)]" />
+			<meta property="og:type" content="article" />
+			[<meta property="og:title" content="(#TITRE|texte_backend)" />]
+			[<meta property="og:description" content="(#INTRODUCTION{300}|attribut_html)" />]
+			[<meta property="og:image" content="#URL_SITE_SPIP/IMG/(#LOGO_ARTICLE**)" />]
+			[<meta property="og:image:alt" content="#URL_SITE_SPIP/IMG/(#LOGO_ARTICLE**)" />]
+			
+			
+			<meta name="twitter:site" content="@UnivParis8">
+			<meta name="twitter:app:country" content="FR" />
+			<meta name="twitter:creator" content="@UnivParis8" />
+			<meta name="twitter:title" content="#TITRE">
+			<meta name="twitter:description" content="[(#INTRODUCTION{350}|attribut_html)]">
+			<meta name="twitter:url" content="[(#URL_ARTICLE|url_absolue)]" />
+			<meta name="twitter:image" content="[#URL_SITE_SPIP/IMG/(#LOGO_ARTICLE**)]">
+		</BOUCLE_meta>
+		<INCLURE{fond=head/dist, env} />
+		<INCLURE{fond=inclure/animation-js,env} />
+		<INCLURE{fond=inclure/back-to-top-js,env} />
+		<INCLURE{fond=inclure/print-js,env} />
+		<INCLURE{fond=inclure/font-size,env} />
+	</head>
+	
+	<body class="pas_surlignable page_article">
+		
+	<div class="page">
+		<a id="top-button"></a>
+
+		<div class="topnav" id="top-header">
+			<INCLURE{fond=inclure/top,env} />
+		</div>
+
+		<div id="p8"><a class="website-brand" href="#URL_SITE_SPIP"><img src ="squelettes/img/logop8_noir.png" alt="#NOM_SITE_SPIP"></a></div>
+		[<div class="navigation" id="navbar">
+				(#INCLURE{fond=inclure/menu,env})
+		</div>]
+
+		<div id="header"class="header">
+			
+				<INCLURE{fond=header/dist, env} />
+			
+		</div>
+        <!-- <div class="main main-article">
+            [<div class=" texte surlignable">(#TEXTE|choixsivide{"Aucun contenu n'a été renseigné pour cet article pour le moment...", #TEXTE})</div>]
+            </div> -->
+		<div class="container">
+			<INCLURE{fond=breadcrumb/rubrique,env} />
+			
+			<div class="wrapper" id="wrapper">
+				<div class="primary container-content row" id="content">
+					<BOUCLE_content(ARTICLES){id_article}{statut=publie}>
+						[(#PS|choixsivide{<div class="col-12">, <div class="col-12 col-md-8">})]               
+                            <h2 class="titre titre-principal">#TITRE</h2>
+	                        <hr>
+                            <INCLURE{fond=inclure/options-article,env} />
+							
+							<BOUCLE_existence(ARTICLES){id_article=#ENV{id_article}}>
+								#SET{lang,#LANG}
+								<B_traductions>
+								
+									<BOUCLE_traductions(ARTICLES){traduction}{lang=#ENV{lang}}>
+										[(#GET{lang}|!={#ENV{lang}}|?{<?php header('Location: #URL_ARTICLE'); exit; ?>})]
+									</BOUCLE_traductions>
+								
+								</B_traductions>
+								<multi>[fr]<p><i>Cet article n'est pas disponible en français.</i></p>[en]<p><i>This article is not available in english.</i></p></multi>
+								<//B_traductions>
+								
+							</BOUCLE_existence>
+
+						</div>
+						<div class="row">
+							[(#PS|choixsivide{<div class="col-12" style="text-align: center;">, <div class="col-12 col-md-8" style="text-align: center; margin-bottom: 1em;">})]
+								<div class="row">
+								<div class="col-5">
+									[(#LOGO_ARTICLE_RUBRIQUE|inserer_attribut{class, img-membre})]
+								</div>
+								<div class="col-7">
+									#CHAPO
+								</div>
+							</div>
+							<hr>
+								
+								</div>
+
+								[(#PS|?{<div class="col-12 col-md-4">
+									<div class="ps main main-article">
+										#PS
+									</div>
+								</div>,})]
+								
+						</div>
+
+						[(#PS|choixsivide{<div class="main main-article col-12">, <div class="main main-article col-12 col-md-8">})]
+                            [<div class=" texte surlignable">(#TEXTE|choixsivide{"Aucun contenu n'a été renseigné pour cet article pour le moment...", #TEXTE})</div>]
+                            </div>
+
+                    </BOUCLE_content>
+
+                <aside class="aside-content col-12 hideme-scroll">
+                    <h2 class="titre" style="margin-top: 1em; margin-bottom: 1em">À lire aussi</h2>
+                    <INCLURE{fond=aside/article, env}/>
+                </aside>
+
+				</div>
+			</div>
+		</div>
+
+		<div class="footer">
+			<div class="container">
+			<INCLURE{fond=footer/dist,env} />
+			</div>
+		</div>
+
+    </div><!--.page-->
+    <script>
+        $('.img-membre').each(function(){           // Note: {.post-thumb img} is css selector of the image tag
+    var t = $(this),
+        s = 'url(' + t.attr('src') + ')',
+        p = t.parent(),
+        d = $('<div></div>');
+    t.hide();
+    p.append(d);
+    d.css({
+        'height'                : 300,          // Note: You can change it for your needs
+        'background-size'       : 'cover',
+        'background-repeat'     : 'no-repeat',
+        'background-position'   : 'center',
+        'background-image'      : s
+    });
+});
+    </script>
+	<script>
+		$("span.spip_documents_center").parents('p').css("text-align", "center");
+	</script>
+	</body>
+	</html>
+</BOUCLE_principale>

@@ -1,0 +1,23 @@
+#HTTP_HEADER{Content-Type: text/calendar; charset:#CHARSET}
+BEGIN:VCALENDAR
+CALSCALE:GREGORIAN
+PRODID: SPIP https://www.spip.net
+VERSION:2.0
+X-WR-CALNAME;VALUE=TEXT:[(#NOM_SITE_SPIP|filtrer_ical)]
+X-WR-RELCALID:[(#URL_SITE_SPIP|filtrer_ical)]
+
+<BOUCLE_evenements(EVENEMENTS){evenement_a_venir}  >
+BEGIN:VEVENT
+SUMMARY:[(#TITRE|filtrer_ical)] [[(#NOM_SITE_SPIP|filtrer_ical)]]
+UID:evenement#ID_EVENEMENT @ [(#URL_SITE_SPIP|filtrer_ical)]
+DTSTAMP:[(#DATE_DEBUT|date_ical)]
+DTSTART:[(#DATE_DEBUT|date_ical)]
+DTEND:[(#DATE_FIN|date_ical)]
+DESCRIPTION:[(#DESCRIPTIF|filtrer_ical)]
+LOCATION: [(#LIEU|filtrer_ical)]
+URL:[(#URL_ARTICLE|url_absolue)]
+STATUS:CONFIRMED
+END:VEVENT
+</BOUCLE_evenements>
+
+END:VCALENDAR

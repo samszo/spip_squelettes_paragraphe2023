@@ -1,0 +1,146 @@
+<BOUCLE_principale(RUBRIQUES){id_rubrique}>
+	<!DOCTYPE html>
+	<html lang="fr">
+	<head>
+		<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)] - Université Paris 8</title>
+		[<meta name="description" content="(#DESCRIPTIF|sinon{#INTRODUCTION}|couper{150}|textebrut)">]
+		<INCLURE{fond=head/dist,env} />
+		<INCLURE{fond=inclure/animation-js,env} />
+		<INCLURE{fond=inclure/back-to-top-js,env} />
+
+	</head>
+    
+	<body data-spy="scroll" data-target=".doc-sidebar">
+		<div class="page">
+			<a id="top-button"></a>
+
+            <div class="topnav" id="top-header">
+                <INCLURE{fond=inclure/top,env} />
+            </div>
+            
+	        <div id="p8"><a class="website-brand" href="#URL_SITE_SPIP"><img src ="squelettes/img/logop8_noir.png" alt="#NOM_SITE_SPIP"></a></div>
+			[<div class="navigation" id="navbar">
+				(#INCLURE{fond=inclure/menu,env})
+			</div>]
+			
+			<div class="header" id="header">
+				
+				<INCLURE{fond=header/dist,env} />
+				
+			</div>
+			
+	        
+			<div class="container">
+				<INCLURE{fond=breadcrumb/rubrique,env} /> 
+				
+				<div class="wrapper" id="wrapper">
+					<div class="container-content row primary" id="content">
+
+                        [(#TEXTE|?{<section class="main-content col-12 col-md-8">, <section class="main-content col-12">})]
+
+                            <h2 class="titre titre-principal">#TITRE</h2>                     
+                            
+                        <div class="main main-membre">
+                          
+                            
+                            <BOUCLE_existence(RUBRIQUES){id_rubrique=#ENV{id_rubrique}}>
+                                #SET{lang,#LANG}
+                                <B_traductions>
+                                
+                                    <BOUCLE_traductions(RUBRIQUES){traduction}{lang=#ENV{lang}}>
+                                        [(#GET{lang}|!={#ENV{lang}}|?{<?php header('Location: #URL_RUBRIQUE'); exit; ?>})]
+                                    </BOUCLE_traductions>
+                                
+                                </B_traductions>
+                                <multi>[fr]<p><i>Cette rubrique n'est pas disponible en français.</i></p>[en]<p><i>This section is not available in english.</i></p></multi>
+                                <//B_traductions>
+                                
+                            </BOUCLE_existence>
+
+                            #SET{itterations, 0}
+                            #SET{itterations2, 0}
+
+                            <div style="display: inherit;">
+                                <nav class="nav nav-tabs">
+                                <BOUCLE_contenant(RUBRIQUES){id_parent= #_principale:ID_RUBRIQUE}{par num titre}>
+                                <BOUCLE_contenu_art_avant(ARTICLES){id_rubrique = #_principale:ID_RUBRIQUE}{titre<#_contenant:RANG}{statut=publie}{tri_rubrique}{doublons nav}>
+
+                                    [(#GET{itterations}|=={0}|?{'<a class="nav-item nav-link active" href="#pa'#GET{itterations}'" data-toggle="tab">','<a class="nav-item nav-link" href="#pa'#GET{itterations}'" data-toggle="tab">'})]
+                                    #TITRE</a>
+                                    
+                                    #SET{itterations, #GET{itterations}|plus{1}}
+                                </BOUCLE_contenu_art_avant>
+                                
+                                [(#GET{itterations}|=={0}|?{'<a class="nav-item nav-link active" href="#pa'#GET{itterations}'" data-toggle="tab">','<a class="nav-item nav-link" href="#pa'#GET{itterations}'" data-toggle="tab">'})]
+                                    #TITRE</a>
+
+                                #SET{itterations, #GET{itterations}|plus{1}}
+                                </BOUCLE_contenant>
+                                
+                                <BOUCLE_contenu_apres(ARTICLES){id_rubrique = #_principale:ID_RUBRIQUE}{statut=publie}{tri_rubrique}{doublons nav}>
+
+                                    [(#GET{itterations}|=={0}|?{'<a class="nav-item nav-link active" href="#pa'#GET{itterations}'" data-toggle="tab">','<a class="nav-item nav-link" href="#pa'#GET{itterations}'" data-toggle="tab">'})]
+                                        #TITRE</a>
+
+                                    #SET{itterations, #GET{itterations}|plus{1}}
+                                </BOUCLE_contenu_apres>
+                            </nav>
+                        </div>
+
+                        <div class="tab-content">
+
+                            <BOUCLE_contenant2(RUBRIQUES){id_parent= #_principale:ID_RUBRIQUE}{par num titre}>
+							    <BOUCLE_contenu_art_avant2(ARTICLES){id_rubrique = #_principale:ID_RUBRIQUE}{titre<#_contenant2:RANG}{statut=publie}{tri_rubrique}{doublons tab}>
+
+                                    [(#GET{itterations2}|=={0}|?{'<div class="tab-pane fade show active" id="pa'#GET{itterations2}'">','<div class="tab-pane fade" id="pa'#GET{itterations2}'">'})]
+                                    #TEXTE</div>
+                                
+                                    #SET{itterations2, #GET{itterations2}|plus{1}}
+                                </BOUCLE_contenu_art_avant2>
+
+                                [(#GET{itterations2}|=={0}|?{'<div class="tab-pane fade show active" id="pa'#GET{itterations2}'">','<div class="tab-pane fade" id="pa'#GET{itterations2}'">'})]
+                                    <ul>
+                                        <BOUCLE_sous_rubrique(ARTICLES){id_rubrique = #_contenant2:ID_RUBRIQUE}{tri_rubrique}>
+                                            <li>
+                                                <a href=#URL_ARTICLE>#TITRE</a>
+                                            </li>
+                                        </BOUCLE_sous_rubrique>
+                                    </ul>
+                                </div>
+
+                                #SET{itterations2, #GET{itterations2}|plus{1}}
+                            </BOUCLE_contenant2>
+
+                            <BOUCLE_contenu_apres2(ARTICLES){id_rubrique = #_principale:ID_RUBRIQUE}{statut=publie}{tri_rubrique}{doublons tab}>
+
+                                [(#GET{itterations2}|=={0}|?{'<div class="tab-pane fade show active" id="pa'#GET{itterations2}'">','<div class="tab-pane fade" id="pa'#GET{itterations2}'">'})]
+                                    #TEXTE</div>
+
+                                #SET{itterations2, #GET{itterations2}|plus{1}}
+                            </BOUCLE_contenu_apres2>
+
+                        </div>
+
+                    </div>
+                        </section>
+                        [(#TEXTE|?{<div class="col-12 col-md-4 hideme">
+                            <div class="ps-onglets">
+                                
+                                <div>#TEXTE</div>
+                            </div>
+                        </div>,})]
+                    </div>
+				</div>
+						
+					</div>
+
+			<div class="footer" id="footer">
+				<div class="container">
+				<INCLURE{fond=footer/dist,env} />
+				</div>
+			</div>
+		</div>
+
+	</body>
+	</html>
+</BOUCLE_principale>

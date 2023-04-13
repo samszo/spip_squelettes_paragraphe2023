@@ -1,0 +1,55 @@
+[(#REM) Menu de navigation dans la page ]
+	
+	<!--	TEST	-->
+	<BOUCLE_test(HIERARCHIE){!id_rubrique=1}>
+		[(#TOTAL_BOUCLE|=={1}|oui) #SET{x, oui}]
+	</BOUCLE_test>
+
+	<BOUCLE_rub2(RUBRIQUES){id_rubrique}{si #GET{x}|=={oui}}>
+
+	</BOUCLE_rub2>
+
+		<BOUCLE_rub1(HIERARCHIE){!id_rubrique=1}{!id_rubrique=26}{profondeur=1}>
+			<h2 class="titre" style="margin-top: 1em; margin-bottom: 1em"><multi>[fr]À lire aussi[en]Read more</multi></h2>
+			<div class="row list-group">
+			<BOUCLE_Rub_n1(RUBRIQUES){id_parent = #_rub1:ID_RUBRIQUE}{par num titre}>
+				
+				<BOUCLE_article_rub_n0_avant(ARTICLES){id_rubrique=#_rub1:ID_RUBRIQUE}{titre<#RANG}{statut=publie}{par num titre}{doublons}>
+					<BOUCLE_actives(CONDITION){si #ENV{id_article}|=={#ID_ARTICLE}}>
+						<div class="col-6 col-md-4">
+							<a href="#URL_ARTICLE" class="list-group-item activ">#TITRE</a>
+						</div>
+					</BOUCLE_actives>
+						<div class="col-6 col-md-4">
+							<a href="#URL_ARTICLE" class="list-group-item list-group-item-action">#TITRE</a>
+						</div>
+					<//B_actives>
+				</BOUCLE_article_rub_n0_avant>
+
+					<BOUCLE_actives_rub(CONDITION){si #ENV{id_rubrique}|=={#ID_RUBRIQUE}}>
+						<div class="col-6 col-md-4">
+							<a class="list-group-item list-group-item-action activ" href="#URL_RUBRIQUE">#TITRE</a>
+						</div>
+					</BOUCLE_actives_rub>
+						<div class="col-6 col-md-4">
+							<a class="list-group-item list-group-item-action" href="#URL_RUBRIQUE">#TITRE</a>
+						</div>
+					<//B_actives_rub>
+					
+			</BOUCLE_Rub_n1>
+
+				<BOUCLE_article_rub_n0(ARTICLES){id_rubrique=#_rub1:ID_RUBRIQUE}{statut=publie}{par num titre}{!par date}{doublons}>
+						
+					<BOUCLE_active(CONDITION){si #ENV{id_article}|=={#ID_ARTICLE}}>
+						<div class="col-6 col-md-4">
+							<a href="#URL_ARTICLE" class="list-group-item activ">#TITRE</a>
+						</div>
+					</BOUCLE_active>
+						<div class="col-6 col-md-4">
+							<a href="#URL_ARTICLE" class="list-group-item list-group-item-action">#TITRE</a>
+						</div>
+					<//B_active>
+				</BOUCLE_article_rub_n0>
+			</div>
+			</BOUCLE_rub1>
+

@@ -1,0 +1,26 @@
+#SET{img, squelettes/img/bando.png}
+
+<BOUCLE_rub(ARTICLES){id_article}>
+
+	<BOUCLEn2(HIERARCHIE){tout}>
+		[(#TOTAL_BOUCLE|<={3}|?{#SET{hierarchie, ok}})]
+
+		[(#LOGO_RUBRIQUE|et{#GET{hierarchie}}) #SET{img, #LOGO_RUBRIQUE|extraire_attribut{src} } ]
+	</BOUCLEn2>
+
+	<BOUCLEn3(HIERARCHIE){id_rubrique}>
+		[(#LOGO_RUBRIQUE|?{#SET{img, #LOGO_RUBRIQUE|extraire_attribut{src}}})]	
+	</BOUCLEn3>
+	
+</BOUCLE_rub>
+
+<div class="bandeau" style="background-image: url('#GET{img}')">
+
+	<div class="bandeau-titre">
+		<a href="#URL_SITE_SPIP" style="font-size:1.5em;">
+			<img src="squelettes/img/logo-para-outlines.svg" alt="Laboratoire Paragraphe" style="display: inherit;" >
+		</a>
+	</div>
+
+</div>
+<INCLURE{fond=inclure/sticky-menu-js,env} />

@@ -1,0 +1,169 @@
+<script>
+
+  // When the user scrolls the page, execute myFunction
+  window.onscroll = function() {myFunction()};
+  
+  // Get the navbar
+  var navbar = document.getElementById("navbar");
+  var searchbar = document.getElementById("searchbar");
+  var nav = document.getElementById("nav");
+  var brand = document.getElementById("navbar-brand");
+  var x = document.getElementsByClassName("dropdown-toggle");
+  var y = document.getElementsByClassName("dropdown-menu");
+  var collapsebtn = document.getElementsByClassName("navbar-toggler");
+  var $cheat = $("#cheat");
+  var mobile = window.mobileCheck;
+  
+  // Get the offset position of the navbar
+
+  // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
+  function myFunction() {
+
+    var collapsebtn = document.getElementsByClassName("navbar-toggler"),
+    style = window.getComputedStyle(collapsebtn[0]),
+    display = style.getPropertyValue('display');
+    if (display == "none"){
+      if (window.pageYOffset >= 600) {
+        brand.style.display = "inherit";
+        nav.style.backgroundColor = "#c2000b";
+        /*
+        for(var i = 0; i < x.length; i++){
+          x[i].style.color = "#fff";
+        }*/
+      navbar.classList.add("sticky")
+  
+    } else {
+      navbar.style.transform = "translateY(0%)";
+      brand.style.display = "none";
+
+      nav.style.backgroundColor = "transparent";
+      /*
+      for(var i = 0; i < x.length; i++){
+          x[i].style.color = "#fff";
+        }
+        */
+      navbar.classList.remove("sticky");
+    }
+  
+    if (window.pageYOffset < 600 && window.pageYOffset > 300){
+      navbar.style.transform = "translateY(-369%)";
+        for(var i = 0; i < y.length; i++){
+          y[i].classList.remove("show");
+        }   
+    }
+    
+  }
+
+  else {
+    if (collapsebtn[0].classList.contains('collapsed')){
+      if (window.pageYOffset >= 536 && window.pageYOffset <= 600) {
+    brand.style.display = "inherit";
+        nav.style.backgroundColor = "#c2000b";
+        /*
+        for(var i = 0; i < x.length; i++){
+          x[i].style.color = "#fff";
+        }*/
+    } 
+
+    if (window.pageYOffset < 536 ){
+      brand.style.display = "none";
+      nav.style.backgroundColor = "transparent";
+      /*
+      for(var i = 0; i < x.length; i++){
+          x[i].style.color = "#fff";
+        }*/
+    }
+    
+
+    if (window.pageYOffset >= 600) {
+    navbar.classList.add("sticky-collapsed")
+  } else {
+    navbar.classList.remove("sticky-collapsed");
+    navbar.style.top = "0";
+  }
+
+  if (window.pageYOffset >= 600 && window.pageYOffset <= 656) {
+    navbar.style.top = window.pageYOffset-656 + "px";
+  }
+
+  if (window.pageYOffset >656){
+      navbar.style.top = 0;
+  }
+}
+else {
+  if (window.pageYOffset >= 536 && window.pageYOffset <= 600) {
+    brand.style.display = "inherit";
+        nav.style.backgroundColor = "#c2000b";
+        /*
+        for(var i = 0; i < x.length; i++){
+          x[i].style.color = "#fff";
+        }*/
+    }
+    
+    if (window.pageYOffset < 536 ){
+      brand.style.display = "none";
+      nav.style.backgroundColor = "transparent";
+
+      /*for(var i = 0; i < x.length; i++){
+          x[i].style.color = "#fff";
+        }*/
+    }
+
+    if (window.pageYOffset >= 600) {
+    navbar.classList.add("sticky-collapsed")
+  } else {
+    navbar.classList.remove("sticky-collapsed");
+    navbar.style.top =0;
+  }
+
+  if (window.pageYOffset >= 600 && window.pageYOffset <= 871) {
+    navbar.style.top = window.pageYOffset-871 + "px";
+  }
+
+  if (window.pageYOffset >871){
+      navbar.style.top = 0;
+  }
+  
+}
+  }
+}
+  
+  window.addEventListener('mousemove', function(e) {
+
+    sbstyle = window.getComputedStyle(searchbar);
+    sbdisplay = sbstyle.getPropertyValue('display');
+
+    var collapsebtn = document.getElementsByClassName("navbar-toggler"),
+    style = window.getComputedStyle(collapsebtn[0]),
+    display = style.getPropertyValue('display');
+    if (display == "none"){
+    var collapsebtn = document.getElementsByClassName("navbar-toggler"),
+    style = window.getComputedStyle(collapsebtn[0]),
+    display = style.getPropertyValue('display');
+    if (window.pageYOffset >=600){
+      
+      if (e.y >= 0 && e.y <= 320){
+        if (sbdisplay == "none"){
+          navbar.style.transform = "translateY(-153%)";
+        }
+        else {
+          navbar.style.transform = "translateY(-221%)";
+        }
+      }
+      else {
+        if (sbdisplay == "none"){
+          navbar.style.transform = "translateY(-279%)";
+        }
+        else {
+          navbar.style.transform = "translateY(-369%)";
+        }
+        for(var i = 0; i < y.length; i++){
+          y[i].classList.remove("show");
+        }  
+      }
+    }
+  }
+  });
+  
+  
+  </script>

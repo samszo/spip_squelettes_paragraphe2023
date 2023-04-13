@@ -1,0 +1,63 @@
+<script type="text/javascript">
+
+$(document).ready(function animateText() {
+    
+        /* Check the location of each desired element */
+        $('.hideme').each( function(i){
+            
+            var top_of_object = $(this).offset().top;
+            var bottom_of_window = $(window).scrollTop() + $(window).height();
+            
+                
+                $(this).animate({
+                    opacity:1,
+                },250);
+
+                $(this).css({
+                    "-webkit-transform": "translateY(0px)",
+                    "-ms-transform": "translateY(0px)",
+                    "transform": "translateY(0px)"
+                },500);
+                    
+            
+        }); 
+
+    
+});
+
+$(document).ready(function animateTextScroll() {
+
+/* Every time the window is scrolled ... */
+$(window).scroll( function animateTextScroll(){
+
+    /* Check the location of each desired element */
+    $('.hideme-scroll').each( function(i){
+        
+        var top_of_object = $(this).offset().top;
+        var bottom_of_window = $(window).scrollTop() + $(window).height();
+        
+        /* If the object is completely visible in the window, fade it it */
+        if( bottom_of_window > top_of_object+200 ){
+            
+            $(this).animate({
+                opacity:1,
+            },250);
+
+            $(this).css({
+                "-webkit-transform": "translateY(0px)",
+                "-ms-transform": "translateY(0px)",
+                "transform": "translateY(0px)"
+            },500);
+                
+        }
+        
+    }); 
+
+});
+
+
+});
+
+
+</script>
+

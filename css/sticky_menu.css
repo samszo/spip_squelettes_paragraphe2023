@@ -1,0 +1,38 @@
+    /* The sticky class is added to the navbar with JS when it reaches its scroll position */
+    .sticky {
+        position: fixed;
+        transition: transform .5s cubic-bezier(.4,0,.2,1);
+        width: 100%;
+        z-index: 17;
+      }
+    
+      .sticky-collapsed {
+        display: inherit !important;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 17;
+      }
+    
+          /* The sticky class is added to the navbar with JS when it reaches its scroll position */
+    .sticky2 {
+        position: fixed;
+        transform: translateY(-211%);
+        transition: transform .5s cubic-bezier(.4,0,.2,1);
+        width: 100%;
+        z-index: 16;
+      }
+    
+      .sticky2-collapsed {
+        position: fixed;
+        top: 56px;
+        width: 100%;
+        z-index: 16;
+      }
+    
+      .sticky2-menu{
+        position: fixed;
+        top: 271px;
+        width: 100%;
+        z-index: 16;     
+      }
